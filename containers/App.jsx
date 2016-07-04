@@ -1,29 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { createList } from '../actions/index';
+import ListContainer from '../components/ListContainer';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.onCreateList = this.onCreateList.bind(this);
-  }
-
-  onCreateList() {
-    this.props.dispatch(createList());
-  }
-
+export default class App extends Component {
   render() {
     return (
-      <button onClick={this.onCreateList}>Create list</button>
+      <ListContainer />
     );
   }
 }
-
-function mapStateToProps(state) {
-  const { lists } = state;
-  return {
-    lists,
-  };
-}
-
-export default connect(mapStateToProps)(App);

@@ -20,7 +20,7 @@ export default function listReducer(state = defaultState, action) {
       return Object.assign({}, state, {
         lists: newLists,
         listOrder: [...state.listOrder, newId],
-        lastusedId: newId,
+        lastUsedId: newId,
       });
     default:
       return state;
