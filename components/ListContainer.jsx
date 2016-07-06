@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createList } from '../actions/index';
+import { onCreateList, beginRenameList, saveRenameList, endRenameList } from '../actions/index';
 import List from './List';
 
 class ListContainer extends Component {
   constructor(props) {
     super(props);
-    this.onCreateList = this.onCreateList.bind(this);
-  }
-
-  onCreateList() {
-    this.props.dispatch(createList());
   }
 
   render() {
     const lists = this.props.lists.listOrder.map((id) => {
-      return <List key={id} list={this.props.lists.lists[id]} />;
+      return <List
+        key={id}
+        list={this.props.lists.items[id]}
+        onBeginRenameList={this.props.onBeginRenameList}
+        onDoneRenameList={this.props.onDoneRenameList}
+        onSaveRenameList={this.props.onSaveRenameList}
+      />;
     });
     return (
       <div>
-        <button onClick={this.onCreateList}>Create list</button>
+        <button onClick={this.props.onCreateList}>Create list</button>
         {lists}
       </div>
     );
@@ -27,10 +28,29 @@ class ListContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const { lists } = state;
+  console.log(state);
+  const { lists, listOrder } = state;
   return {
     lists,
+    listOrder,
   };
 }
 
-export default connect(mapStateToProps)(ListContainer);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCreateList: () => {
+      dispatch(onCreateList());
+    },
+    onBeginRenameList: (listId) => {
+      dispatch(beginRenameList(listId));
+    },
+    onSaveRenameList: (listId, name) => {
+      dispatch(saveRenameList(listId, name));
+    },
+    onDoneRenameList: (listId) => {
+      dispatch(endRenameList(listId));
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListContainer);
