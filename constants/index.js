@@ -1,14 +1,21 @@
 export const CREATE_LIST = 'CREATE_LIST';
+export const CREATE_LIST_TODOS = 'CREATE_LIST_TODOS';
 export const ADD_LIST_TO_VIEW = 'ADD_LIST_TO_VIEW';
 export const UPDATE_LIST_ID = 'UPDATE_LIST_ID';
 export const BEGIN_RENAME_LIST = 'BEGIN_RENAME_LIST';
 export const END_RENAME_LIST = 'END_RENAME_LIST';
 export const SAVE_RENAME_LIST = 'SAVE_RENAME_LIST';
+export const TOGGLE_LIST_VIEW = 'TOGGLE_LIST_VIEW';
 export const MOVE_LIST = 'MOVE_LIST';
 
-export const CREATE_ITEM = 'CREATE_ITEM';
-export const UPDATE_ITEM = 'UPDATE_ITEM';
+export const CREATE_TODO = 'CREATE_TODO';
+export const UPDATE_TODO_ID = 'UPDATE_TODO_ID';
+export const MOVE_TODO_TO_LIST = 'MOVE_TODO_TO_LIST';
+export const BEGIN_EDIT_TODO = 'BEGIN_EDIT_TODO';
+export const END_EDIT_TODO = 'END_EDIT_TODO';
+export const SAVE_EDIT_TODO = 'SAVE_EDIT_TODO';
+export const COMPLETE_TODO = 'COMPLETE_TODO';
+export const UNCOMPLETE_TODO = 'UNCOMPLETE_TODO';
+
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const MOVE_ITEM = 'MOVE_ITEM';
-export const COMPLETE_ITEM = 'COMPLETE_ITEM';
-export const UNCOMPLETE_ITEM = 'UNCOMPLETE_ITEM';

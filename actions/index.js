@@ -1,7 +1,7 @@
 import * as constants from '../constants/index';
 import thunk from 'redux-thunk';
 
-function action(type, payload) {
+export function action(type, payload) {
   return {
     type,
     payload,
@@ -14,12 +14,17 @@ export function onCreateList() {
     const newId = lastUsedId + 1;
     dispatch(updateListId(newId));
     dispatch(createList(newId));
+    dispatch(createListTodos(newId));
     dispatch(addListToView(newId));
   }
 }
 
 export function createList(id) {
   return action(constants.CREATE_LIST, { id });
+}
+
+export function createListTodos(listId) {
+  return action(constants.CREATE_LIST_TODOS, { listId });
 }
 
 export function addListToView(id) {
@@ -45,6 +50,12 @@ export function saveRenameList(listId, listName) {
 
 export function endRenameList(listId) {
   return action(constants.END_RENAME_LIST, {
+    listId,
+  });
+}
+
+export function toggleListView(listId) {
+  return action(constants.TOGGLE_LIST_VIEW, {
     listId,
   });
 }

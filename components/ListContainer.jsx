@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { onCreateList, beginRenameList, saveRenameList, endRenameList } from '../actions/index';
+import {
+  onCreateList, beginRenameList, saveRenameList, endRenameList,
+  toggleListView,
+} from '../actions/index';
+import {
+  onCreateTodo, beginEditTodo, saveEditTodo, endEditTodo,
+  completeTodo,
+  uncompleteTodo,
+} from '../actions/todos';
 import List from './List';
 
 class ListContainer extends Component {
@@ -16,11 +24,20 @@ class ListContainer extends Component {
         onBeginRenameList={this.props.onBeginRenameList}
         onDoneRenameList={this.props.onDoneRenameList}
         onSaveRenameList={this.props.onSaveRenameList}
+        onToggleListView={this.props.onToggleListView}
+        onBeginEditTodo={this.props.onBeginEditTodo}
+        onDoneEditTodo={this.props.onDoneEditTodo}
+        onSaveEditTodo={this.props.onSaveEditTodo}
+        onCreateTodo={this.props.onCreateTodo}
+        onCompleteTodo={this.props.onCompleteTodo}
+        onUncompleteTodo={this.props.onUncompleteTodo}
+        todos={this.props.todos}
+        listTodos={this.props.listTodos}
       />;
     });
     return (
       <div>
-        <button onClick={this.props.onCreateList}>Create list</button>
+        <button onClick={this.props.onCreateList} className="create-list-btn">Create list</button>
         {lists}
       </div>
     );
@@ -29,10 +46,11 @@ class ListContainer extends Component {
 
 function mapStateToProps(state) {
   console.log(state);
-  const { lists, listOrder } = state;
+  const { lists, todos, listTodos } = state;
   return {
     lists,
-    listOrder,
+    todos,
+    listTodos,
   };
 }
 
@@ -49,6 +67,27 @@ const mapDispatchToProps = (dispatch) => {
     },
     onDoneRenameList: (listId) => {
       dispatch(endRenameList(listId));
+    },
+    onToggleListView: (listId) => {
+      dispatch(toggleListView(listId));
+    },
+    onCreateTodo: (listId) => {
+      dispatch(onCreateTodo(listId));
+    },
+    onBeginEditTodo: (todoId) => {
+      dispatch(beginEditTodo(todoId));
+    },
+    onSaveEditTodo: (todoId, todoContent) => {
+      dispatch(saveEditTodo(todoId, todoContent));
+    },
+    onDoneEditTodo: (todoId) => {
+      dispatch(endEditTodo(todoId));
+    },
+    onCompleteTodo: (todoId) => {
+      dispatch(completeTodo(todoId));
+    },
+    onUncompleteTodo: (todoId) => {
+      dispatch(uncompleteTodo(todoId));
     },
   }
 }

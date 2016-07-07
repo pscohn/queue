@@ -3,28 +3,19 @@ import * as constants from '../constants/index';
 
 let id;
 
-function getDefaultList(newId) {
+function getDefaultTodo(newId) {
   return {
     id: newId,
-    name: 'Untitled List',
-    isRenaming: false,
-    isShowingComplete: false,
+    content: 'Untitled Todo',
+    isEditing: false,
+    isComplete: false,
   }
 };
 
 function lastUsedId(state = 0, action) {
   switch (action.type) {
-    case constants.UPDATE_LIST_ID:
+    case constants.UPDATE_TODO_ID:
       return action.payload.id;
-    default:
-      return state;
-  }
-}
-
-function listOrder(state = [], action) {
-  switch (action.type) {
-    case constants.ADD_LIST_TO_VIEW:
-      return [...state, action.payload.id];
     default:
       return state;
   }
@@ -32,46 +23,55 @@ function listOrder(state = [], action) {
 
 function items(state = {}, action) {
   switch (action.type) {
-    case constants.CREATE_LIST:
+    case constants.CREATE_TODO:
       const newId = action.payload.id;
       return {
         ...state,
-        [newId]: getDefaultList(newId),
+        [newId]: getDefaultTodo(newId),
       }
-    case constants.BEGIN_RENAME_LIST:
-      id = action.payload.listId;
+    case constants.BEGIN_EDIT_TODO:
+      id = action.payload.todoId;
       return {
         ...state,
         [id]: {
           ...state[id],
-          isRenaming: true,
+          isEditing: true,
         }
       };
-    case constants.SAVE_RENAME_LIST:
-      id = action.payload.listId;
+    case constants.SAVE_EDIT_TODO:
+      id = action.payload.todoId;
       return {
         ...state,
         [id]: {
           ...state[id],
-          name: action.payload.listName,
+          content: action.payload.todoContent,
         },
       };
-    case constants.END_RENAME_LIST:
-      id = action.payload.listId;
+    case constants.END_EDIT_TODO:
+      id = action.payload.todoId;
       return {
         ...state,
         [id]: {
           ...state[id],
-          isRenaming: false,
+          isEditing: false,
         },
       };
-    case constants.TOGGLE_LIST_VIEW:
-      id = action.payload.listId;
+    case constants.COMPLETE_TODO:
+      id = action.payload.todoId;
       return {
         ...state,
         [id]: {
           ...state[id],
-          isShowingComplete: !state[id].isShowingComplete,
+          isComplete: true,
+        },
+      };
+    case constants.UNCOMPLETE_TODO:
+      id = action.payload.todoId;
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          isComplete: false,
         },
       };
     default:
@@ -81,7 +81,7 @@ function items(state = {}, action) {
 
 const listReducer = combineReducers({
   lastUsedId,
-  listOrder,
+//  listOrder,
   items,
 });
 
