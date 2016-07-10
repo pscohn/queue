@@ -25,6 +25,18 @@ function listOrder(state = [], action) {
   switch (action.type) {
     case constants.ADD_LIST_TO_VIEW:
       return [...state, action.payload.id];
+    case constants.REMOVE_LIST_FROM_VIEW:
+      const index = state.indexOf(action.payload.id);
+      return [...state.slice(0, index), ...state.slice(index + 1)];
+    case constants.REORDER_LISTS:
+      const lists = state.slice();
+      const spliceList = lists.splice(action.payload.listIndex, 1);
+      lists.splice(
+        action.payload.hoverIndex,
+        0,
+        spliceList[0]
+      );
+      return lists;
     default:
       return state;
   }

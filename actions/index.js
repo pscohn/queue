@@ -31,6 +31,10 @@ export function addListToView(id) {
   return action(constants.ADD_LIST_TO_VIEW, { id });
 }
 
+export function removeListFromView(id) {
+  return action(constants.REMOVE_LIST_FROM_VIEW, { id });
+}
+
 export function updateListId(id) {
   return action(constants.UPDATE_LIST_ID, { id });
 }
@@ -57,5 +61,12 @@ export function endRenameList(listId) {
 export function toggleListView(listId) {
   return action(constants.TOGGLE_LIST_VIEW, {
     listId,
+  });
+}
+
+export function reorderLists(listIndex, hoverIndex) {
+  return action(constants.REORDER_LISTS, {
+    listIndex,
+    hoverIndex,
   });
 }

@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import {
   onCreateList, beginRenameList, saveRenameList, endRenameList,
   toggleListView,
+  onDropList,
+  reorderLists,
+  addListToView,
+  removeListFromView,
 } from '../actions/index';
 import {
   onCreateTodo, beginEditTodo, saveEditTodo, endEditTodo,
@@ -17,20 +23,34 @@ class ListContainer extends Component {
   }
 
   render() {
-    const lists = this.props.lists.listOrder.map((id) => {
+    const hiddenLists = Object.keys(this.props.lists.items).map((id) => {
+      id = Number(id);
+      if (this.props.lists.listOrder.indexOf(id) === -1) {
+        return (
+          <span key={id}>
+            <a onClick={this.props.onShowList.bind(this, id)}>{this.props.lists.items[id].name}</a>
+            {' '}
+          </span>
+        );
+      }
+    });
+    const lists = this.props.lists.listOrder.map((id, index) => {
       return <List
         key={id}
+        index={index}
         list={this.props.lists.items[id]}
         onBeginRenameList={this.props.onBeginRenameList}
         onDoneRenameList={this.props.onDoneRenameList}
         onSaveRenameList={this.props.onSaveRenameList}
         onToggleListView={this.props.onToggleListView}
+        onHideList={this.props.onHideList}
         onBeginEditTodo={this.props.onBeginEditTodo}
         onDoneEditTodo={this.props.onDoneEditTodo}
         onSaveEditTodo={this.props.onSaveEditTodo}
         onCreateTodo={this.props.onCreateTodo}
         onCompleteTodo={this.props.onCompleteTodo}
         onUncompleteTodo={this.props.onUncompleteTodo}
+        onDropList={this.props.onDropList}
         todos={this.props.todos}
         listTodos={this.props.listTodos}
       />;
@@ -38,6 +58,9 @@ class ListContainer extends Component {
     return (
       <div>
         <button onClick={this.props.onCreateList} className="create-list-btn">Create list</button>
+        <div>
+          {hiddenLists}
+        </div>
         {lists}
       </div>
     );
@@ -71,6 +94,15 @@ const mapDispatchToProps = (dispatch) => {
     onToggleListView: (listId) => {
       dispatch(toggleListView(listId));
     },
+    onToggleListVisibility: (listId) => {
+      dispatch(toggleListVisibility(listId));
+    },
+    onShowList: (listId) => {
+      dispatch(addListToView(listId));
+    },
+    onHideList: (listId) => {
+      dispatch(removeListFromView(listId));
+    },
     onCreateTodo: (listId) => {
       dispatch(onCreateTodo(listId));
     },
@@ -89,7 +121,10 @@ const mapDispatchToProps = (dispatch) => {
     onUncompleteTodo: (todoId) => {
       dispatch(uncompleteTodo(todoId));
     },
+    onDropList: (listIndex, hoverIndex) => {
+      dispatch(reorderLists(listIndex, hoverIndex));
+    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(ListContainer));
