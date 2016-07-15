@@ -56,22 +56,13 @@ function items(state = {}, action) {
           isEditing: false,
         },
       };
-    case constants.COMPLETE_TODO:
+    case constants.TOGGLE_TODO:
       id = action.payload.todoId;
       return {
         ...state,
         [id]: {
           ...state[id],
-          isComplete: true,
-        },
-      };
-    case constants.UNCOMPLETE_TODO:
-      id = action.payload.todoId;
-      return {
-        ...state,
-        [id]: {
-          ...state[id],
-          isComplete: false,
+          isComplete: !state[id].isComplete,
         },
       };
     default:

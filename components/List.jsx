@@ -79,8 +79,7 @@ class List extends Component {
     onSaveRenameList: T.func.isRequired,
     onDoneRenameList: T.func.isRequired,
     onCreateTodo: T.func.isRequired,
-    onCompleteTodo: T.func.isRequired,
-    onUncompleteTodo: T.func.isRequired,
+    onToggleTodo: T.func.isRequired,
     onToggleListView: T.func.isRequired,
     onHideList: T.func.isRequired,
     connectDragSource: T.func.isRequired,
@@ -122,8 +121,7 @@ class List extends Component {
           onBeginEditTodo={this.props.onBeginEditTodo}
           onDoneEditTodo={this.props.onDoneEditTodo}
           onSaveEditTodo={this.props.onSaveEditTodo}
-          onCompleteTodo={this.props.onCompleteTodo}
-          onUncompleteTodo={this.props.onUncompleteTodo}
+          onToggleTodo={this.props.onToggleTodo}
         />
       )
     });

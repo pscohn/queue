@@ -11,9 +11,11 @@ import {
   removeListFromView,
 } from '../actions/index';
 import {
+  onSaveState,
+} from '../actions/state';
+import {
   onCreateTodo, beginEditTodo, saveEditTodo, endEditTodo,
-  completeTodo,
-  uncompleteTodo,
+  toggleTodo,
 } from '../actions/todos';
 import List from './List';
 
@@ -48,8 +50,7 @@ class ListContainer extends Component {
         onDoneEditTodo={this.props.onDoneEditTodo}
         onSaveEditTodo={this.props.onSaveEditTodo}
         onCreateTodo={this.props.onCreateTodo}
-        onCompleteTodo={this.props.onCompleteTodo}
-        onUncompleteTodo={this.props.onUncompleteTodo}
+        onToggleTodo={this.props.onToggleTodo}
         onDropList={this.props.onDropList}
         todos={this.props.todos}
         listTodos={this.props.listTodos}
@@ -58,6 +59,7 @@ class ListContainer extends Component {
     return (
       <div>
         <button onClick={this.props.onCreateList} className="create-list-btn">Create list</button>
+        <button onClick={this.props.onSaveState}>Save</button>
         <div>
           {hiddenLists}
         </div>
@@ -69,6 +71,7 @@ class ListContainer extends Component {
 
 function mapStateToProps(state) {
   console.log(state);
+  console.log(JSON.stringify(state));
   const { lists, todos, listTodos } = state;
   return {
     lists,
@@ -115,15 +118,15 @@ const mapDispatchToProps = (dispatch) => {
     onDoneEditTodo: (todoId) => {
       dispatch(endEditTodo(todoId));
     },
-    onCompleteTodo: (todoId) => {
-      dispatch(completeTodo(todoId));
-    },
-    onUncompleteTodo: (todoId) => {
-      dispatch(uncompleteTodo(todoId));
+    onToggleTodo: (todoId) => {
+      dispatch(toggleTodo(todoId));
     },
     onDropList: (listIndex, hoverIndex) => {
       dispatch(reorderLists(listIndex, hoverIndex));
-    }
+    },
+    onSaveState: () => {
+      dispatch(onSaveState());
+    },
   }
 }
 

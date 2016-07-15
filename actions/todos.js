@@ -43,15 +43,8 @@ export function endEditTodo(todoId) {
   });
 }
 
-export function completeTodo(todoId) {
-  return action(constants.COMPLETE_TODO, {
-    todoId,
-  });
-}
-
-
-export function uncompleteTodo(todoId) {
-  return action(constants.UNCOMPLETE_TODO, {
+export function toggleTodo(todoId) {
+  return action(constants.TOGGLE_TODO, {
     todoId,
   });
 }

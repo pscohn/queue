@@ -6,16 +6,14 @@ export default class Todo extends Component {
     this.onSaveEditTodo = this.onSaveEditTodo.bind(this);
     this.onBeginEditTodo = this.props.onBeginEditTodo.bind(this, this.props.todo.id);
     this.onDoneEditTodo = this.props.onDoneEditTodo.bind(this, this.props.todo.id);
-    this.onCompleteTodo = this.props.onCompleteTodo.bind(this, this.props.todo.id);
-    this.onUncompleteTodo = this.props.onUncompleteTodo.bind(this, this.props.todo.id);
+    this.onToggleTodo = this.props.onToggleTodo.bind(this, this.props.todo.id);
   }
 
   static propTypes = {
     onBeginEditTodo: T.func.isRequired,
     onSaveEditTodo: T.func.isRequired,
     onDoneEditTodo: T.func.isRequired,
-    onCompleteTodo: T.func.isRequired,
-    onUncompleteTodo: T.func.isRequired,
+    onToggleTodo: T.func.isRequired,
   }
 
   onSaveEditTodo() {
@@ -32,16 +30,10 @@ export default class Todo extends Component {
       );
     }
 
-    let toggleButton;
-    if (this.props.todo.isComplete === true) {
-      toggleButton = <button onClick={this.onUncompleteTodo}>Uncomplete</button>;
-    } else {
-      toggleButton = <button onClick={this.onCompleteTodo}>Complete</button>;
-    }
     return (
       <div className="todo">
         <span onClick={this.onBeginEditTodo}>{this.props.todo.content}</span>
-        {toggleButton}
+        <button onClick={this.onToggleTodo}>{this.props.todo.isComplete ? 'Uncomplete' : 'Complete'}</button>
       </div>
     );
   }

@@ -15,8 +15,7 @@ export const MOVE_TODO_TO_LIST = 'MOVE_TODO_TO_LIST';
 export const BEGIN_EDIT_TODO = 'BEGIN_EDIT_TODO';
 export const END_EDIT_TODO = 'END_EDIT_TODO';
 export const SAVE_EDIT_TODO = 'SAVE_EDIT_TODO';
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const UNCOMPLETE_TODO = 'UNCOMPLETE_TODO';
+export const TOGGLE_TODO = 'TOGGLE_TODO';
 
-export const DELETE_ITEM = 'DELETE_ITEM';
-export const MOVE_ITEM = 'MOVE_ITEM';
+export const SAVE_STATE = 'SAVE_STATE';
+export const UPLOAD_STATE = 'UPLOAD_STATE';
