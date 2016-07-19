@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as T } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
-import Todo from './Todo';
+import TodosContainer from './TodosContainer';
 import flow from 'lodash/flow';
 
 const listType = { LIST: 'LIST' };
@@ -79,7 +79,6 @@ class List extends Component {
     onSaveRenameList: T.func.isRequired,
     onDoneRenameList: T.func.isRequired,
     onCreateTodo: T.func.isRequired,
-    onToggleTodo: T.func.isRequired,
     onToggleListView: T.func.isRequired,
     onHideList: T.func.isRequired,
     connectDragSource: T.func.isRequired,
@@ -108,26 +107,6 @@ class List extends Component {
     );
   }
 
-  renderTodos() {
-    const shouldShowComplete = this.props.list.isShowingComplete === true;
-    const todos = this.props.listTodos.lists[this.props.list.id].filter((id) => {
-      const { isComplete } = this.props.todos.items[id];
-      return this.props.list.isShowingComplete ? isComplete === true : isComplete === false;
-    }).map((id) => {
-      return (
-        <Todo
-          key={id}
-          todo={this.props.todos.items[id]}
-          onBeginEditTodo={this.props.onBeginEditTodo}
-          onDoneEditTodo={this.props.onDoneEditTodo}
-          onSaveEditTodo={this.props.onSaveEditTodo}
-          onToggleTodo={this.props.onToggleTodo}
-        />
-      )
-    });
-    return todos;
-  }
-
   render() {
     const { isDragging, connectDragSource, connectDropTarget } = this.props;
     const opacity = isDragging ? 0 : 1;
@@ -137,7 +116,9 @@ class List extends Component {
         {this.renderListName()}
         <button onClick={this.onToggleListView}>Show {this.props.list.isShowingComplete ? 'Active' : 'Complete'}</button>
         <button onClick={this.onHideList}>Hide</button>
-        {this.renderTodos()}
+        <TodosContainer
+          list={this.props.list}
+        />
         {this.props.list.isShowingComplete ? undefined : <button style={{display: 'block'}} onClick={this.onCreateTodo}>Add Item</button>}
       </div>
     ));

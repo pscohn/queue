@@ -14,8 +14,7 @@ import {
   onSaveState,
 } from '../actions/state';
 import {
-  onCreateTodo, beginEditTodo, saveEditTodo, endEditTodo,
-  toggleTodo,
+  onCreateTodo,
 } from '../actions/todos';
 import List from './List';
 
@@ -46,11 +45,7 @@ class ListContainer extends Component {
         onSaveRenameList={this.props.onSaveRenameList}
         onToggleListView={this.props.onToggleListView}
         onHideList={this.props.onHideList}
-        onBeginEditTodo={this.props.onBeginEditTodo}
-        onDoneEditTodo={this.props.onDoneEditTodo}
-        onSaveEditTodo={this.props.onSaveEditTodo}
         onCreateTodo={this.props.onCreateTodo}
-        onToggleTodo={this.props.onToggleTodo}
         onDropList={this.props.onDropList}
         todos={this.props.todos}
         listTodos={this.props.listTodos}
@@ -108,18 +103,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     onCreateTodo: (listId) => {
       dispatch(onCreateTodo(listId));
-    },
-    onBeginEditTodo: (todoId) => {
-      dispatch(beginEditTodo(todoId));
-    },
-    onSaveEditTodo: (todoId, todoContent) => {
-      dispatch(saveEditTodo(todoId, todoContent));
-    },
-    onDoneEditTodo: (todoId) => {
-      dispatch(endEditTodo(todoId));
-    },
-    onToggleTodo: (todoId) => {
-      dispatch(toggleTodo(todoId));
     },
     onDropList: (listIndex, hoverIndex) => {
       dispatch(reorderLists(listIndex, hoverIndex));

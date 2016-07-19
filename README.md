@@ -4,9 +4,9 @@ TODO
 - offline db
 - read more on smart/container components
 - hot reloading
-- flow types
+- css modules
+- flow types?
 - split out boilerplate
 - nice styles - material-ui?
 - allow enter to submit fields
-- refactor complete/uncomplete
 - nicer flow to add/edit items - one click
