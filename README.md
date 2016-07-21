@@ -1,7 +1,7 @@
 TODO
 
+- tests
 - implement list items with editing, completing, drag and drop
-- offline db
 - read more on smart/container components
 - hot reloading
 - css modules
@@ -10,3 +10,4 @@ TODO
 - nice styles - material-ui?
 - allow enter to submit fields
 - nicer flow to add/edit items - one click
+- split out hydration

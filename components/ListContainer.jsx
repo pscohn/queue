@@ -12,6 +12,7 @@ import {
 } from '../actions/index';
 import {
   onSaveState,
+  onLoadState,
 } from '../actions/state';
 import {
   onCreateTodo,
@@ -21,6 +22,12 @@ import List from './List';
 class ListContainer extends Component {
   constructor(props) {
     super(props);
+    this.onLoadState = this.onLoadState.bind(this);
+  }
+
+  onLoadState() {
+    const state = JSON.parse(this._state.value);
+    this.props.onLoadState(state);
   }
 
   render() {
@@ -54,11 +61,13 @@ class ListContainer extends Component {
     return (
       <div>
         <button onClick={this.props.onCreateList} className="create-list-btn">Create list</button>
-        <button onClick={this.props.onSaveState}>Save</button>
         <div>
           {hiddenLists}
         </div>
         {lists}
+        <button onClick={this.props.onSaveState}>Save</button>
+        <textarea ref={(cmp) => this._state = cmp} />
+        <button onClick={this.onLoadState}>Load</button>
       </div>
     );
   }
@@ -109,6 +118,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSaveState: () => {
       dispatch(onSaveState());
+    },
+    onLoadState: (json) => {
+      dispatch(onLoadState(json));
     },
   }
 }
