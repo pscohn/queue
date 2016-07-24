@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import * as constants from '../constants/index';
 
-let id;
+let id, listId, todoId;
 
 function lists(state = {}, action) {
   switch (action.type) {
@@ -11,10 +11,23 @@ function lists(state = {}, action) {
         [action.payload.listId]: [],
       }
     case constants.MOVE_TODO_TO_LIST:
-      const { listId, todoId } = action.payload;
+      listId = action.payload.listId;
+      todoId = action.payload.todoId;
       return {
         ...state,
         [listId]: [...state[listId], todoId],
+      }
+    case constants.REMOVE_TODO_FROM_LIST:
+      listId = action.payload.listId;
+      todoId = action.payload.todoId;
+      const idx = state[listId].indexOf(todoId);
+      const rest = [
+        ...state[listId].slice(0, idx),
+        ...state[listId].slice(idx + 1),
+      ];
+      return {
+        ...state,
+        [listId]: rest,
       }
     default:
       return state;

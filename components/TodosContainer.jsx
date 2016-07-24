@@ -5,6 +5,7 @@ import {
   saveEditTodo,
   endEditTodo,
   toggleTodo,
+  onDeleteTodo,
 } from '../actions/todos';
 import Todo from './Todo';
 
@@ -14,6 +15,7 @@ class TodosContainer extends Component {
     onSaveEditTodo: T.func.isRequired,
     onDoneEditTodo: T.func.isRequired,
     onToggleTodo: T.func.isRequired,
+    onDeleteTodo: T.func.isRequired,
   }
 
   render() {
@@ -26,10 +28,12 @@ class TodosContainer extends Component {
         <Todo
           key={id}
           todo={this.props.todos.items[id]}
+          list={this.props.list}
           onBeginEditTodo={this.props.onBeginEditTodo}
           onDoneEditTodo={this.props.onDoneEditTodo}
           onSaveEditTodo={this.props.onSaveEditTodo}
           onToggleTodo={this.props.onToggleTodo}
+          onDeleteTodo={this.props.onDeleteTodo}
         />
       )
     });
@@ -64,6 +68,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onToggleTodo: (todoId) => {
       dispatch(toggleTodo(todoId));
+    },
+    onDeleteTodo: (listId, todoId) => {
+      dispatch(onDeleteTodo(listId, todoId));
     },
   }
 }

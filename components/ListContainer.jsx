@@ -74,8 +74,6 @@ class ListContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
-  console.log(JSON.stringify(state));
   const { lists, todos, listTodos } = state;
   return {
     lists,

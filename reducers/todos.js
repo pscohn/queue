@@ -29,6 +29,9 @@ function items(state = {}, action) {
         ...state,
         [newId]: getDefaultTodo(newId),
       }
+    case constants.DELETE_TODO:
+      let { [String(action.payload.id)]: deletedItem, ...rest } = state;
+      return rest;
     case constants.BEGIN_EDIT_TODO:
       id = action.payload.todoId;
       return {

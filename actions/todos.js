@@ -12,8 +12,19 @@ export function onCreateTodo(listId) {
   }
 }
 
+export function onDeleteTodo(listId, todoId) {
+  return (dispatch, getState) => {
+    dispatch(removeTodoFromList(listId, todoId));
+    dispatch(deleteTodo(todoId));
+  }
+}
+
 export function createTodo(id) {
   return action(constants.CREATE_TODO, { id });
+}
+
+export function deleteTodo(id) {
+  return action(constants.DELETE_TODO, { id });
 }
 
 export function updateTodoId(id) {
@@ -22,6 +33,10 @@ export function updateTodoId(id) {
 
 export function moveTodoToList(listId, todoId) {
   return action(constants.MOVE_TODO_TO_LIST, { listId, todoId });
+}
+
+export function removeTodoFromList(listId, todoId) {
+  return action(constants.REMOVE_TODO_FROM_LIST, { listId, todoId });
 }
 
 export function beginEditTodo(todoId) {

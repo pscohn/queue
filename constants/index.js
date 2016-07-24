@@ -12,10 +12,12 @@ export const REORDER_LISTS = 'REORDER_LISTS';
 export const CREATE_TODO = 'CREATE_TODO';
 export const UPDATE_TODO_ID = 'UPDATE_TODO_ID';
 export const MOVE_TODO_TO_LIST = 'MOVE_TODO_TO_LIST';
+export const REMOVE_TODO_FROM_LIST = 'REMOVE_TODO_FROM_LIST';
 export const BEGIN_EDIT_TODO = 'BEGIN_EDIT_TODO';
 export const END_EDIT_TODO = 'END_EDIT_TODO';
 export const SAVE_EDIT_TODO = 'SAVE_EDIT_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
 
 export const SAVE_STATE = 'SAVE_STATE';
 export const LOAD_STATE = 'LOAD_STATE';

@@ -1,7 +1,9 @@
 TODO
 
+- delete lists
 - tests
-- implement list items with editing, completing, drag and drop
+- drag and drop todos to order them
+- drag and drop todos to different lists
 - read more on smart/container components
 - hot reloading
 - css modules
