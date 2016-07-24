@@ -8,6 +8,8 @@ export const END_RENAME_LIST = 'END_RENAME_LIST';
 export const SAVE_RENAME_LIST = 'SAVE_RENAME_LIST';
 export const TOGGLE_LIST_VIEW = 'TOGGLE_LIST_VIEW';
 export const REORDER_LISTS = 'REORDER_LISTS';
+export const DELETE_LIST = 'DELETE_LIST';
+export const REMOVE_LIST_TODOS = 'REMOVE_LIST_TODOS';
 
 export const CREATE_TODO = 'CREATE_TODO';
 export const UPDATE_TODO_ID = 'UPDATE_TODO_ID';

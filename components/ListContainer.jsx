@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import {
-  onCreateList, beginRenameList, saveRenameList, endRenameList,
+  onCreateList,
+  beginRenameList,
+  saveRenameList,
+  endRenameList,
+  onDeleteList,
   toggleListView,
   onDropList,
   reorderLists,
@@ -54,6 +58,7 @@ class ListContainer extends Component {
         onHideList={this.props.onHideList}
         onCreateTodo={this.props.onCreateTodo}
         onDropList={this.props.onDropList}
+        onDeleteList={this.props.onDeleteList}
         todos={this.props.todos}
         listTodos={this.props.listTodos}
       />;
@@ -86,6 +91,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onCreateList: () => {
       dispatch(onCreateList());
+    },
+    onDeleteList: (listId) => {
+      dispatch(onDeleteList(listId));
     },
     onBeginRenameList: (listId) => {
       dispatch(beginRenameList(listId));

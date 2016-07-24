@@ -50,6 +50,9 @@ function items(state = {}, action) {
         ...state,
         [newId]: getDefaultList(newId),
       }
+    case constants.DELETE_LIST:
+      const { [String(action.payload.id)]: deletedList, ...rest } = state;
+      return rest;
     case constants.BEGIN_RENAME_LIST:
       id = action.payload.listId;
       return {

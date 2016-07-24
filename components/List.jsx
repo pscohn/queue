@@ -71,6 +71,7 @@ class List extends Component {
     this.onHideList = this.props.onHideList.bind(this, this.props.list.id);
     this.onSaveRenameList = this.onSaveRenameList.bind(this);
     this.onCreateTodo = this.props.onCreateTodo.bind(this, this.props.list.id);
+    this.onDeleteList = this.props.onDeleteList.bind(this, this.props.list.id);
   }
 
   static propTypes = {
@@ -78,6 +79,7 @@ class List extends Component {
     onBeginRenameList: T.func.isRequired,
     onSaveRenameList: T.func.isRequired,
     onDoneRenameList: T.func.isRequired,
+    onDeleteList: T.func.isRequired,
     onCreateTodo: T.func.isRequired,
     onToggleListView: T.func.isRequired,
     onHideList: T.func.isRequired,
@@ -116,6 +118,7 @@ class List extends Component {
         {this.renderListName()}
         <button onClick={this.onToggleListView}>Show {this.props.list.isShowingComplete ? 'Active' : 'Complete'}</button>
         <button onClick={this.onHideList}>Hide</button>
+        <button onClick={this.onDeleteList}>Delete</button>
         <TodosContainer
           list={this.props.list}
         />

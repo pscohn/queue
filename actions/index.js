@@ -1,5 +1,6 @@
 import * as constants from '../constants/index';
 import thunk from 'redux-thunk';
+import { deleteTodo } from './todos';
 
 export function action(type, payload) {
   return {
@@ -17,6 +18,26 @@ export function onCreateList() {
     dispatch(createListTodos(newId));
     dispatch(addListToView(newId));
   }
+}
+
+export function onDeleteList(id) {
+  return (dispatch, getState) => {
+    const ids = getState().listTodos.lists[id];
+    dispatch(removeListFromView(id));
+    dispatch(removeListTodos(id));
+    dispatch(deleteList(id));
+    for (let i = 0; i < ids.length; i++) {
+      dispatch(deleteTodo(ids[i]));
+    }
+  }
+}
+
+export function deleteList(id) {
+  return action(constants.DELETE_LIST, { id });
+}
+
+export function removeListTodos(id) {
+  return action(constants.REMOVE_LIST_TODOS, { id });
 }
 
 export function createList(id) {
