@@ -9,7 +9,7 @@ import {
   onDeleteTodo,
   onDropTodo,
   reorderTodos,
-} from '../actions/todos';
+} from './todosActions';
 import Todo from './Todo';
 
 class TodosContainer extends Component {

@@ -1,6 +1,6 @@
-import * as constants from '../constants/index';
+import * as constants from '../../constants';
 import thunk from 'redux-thunk';
-import { action } from './index';
+import action from '../../services/action';
 
 export function onCreateTodo(listId) {
   return (dispatch, getState) => {

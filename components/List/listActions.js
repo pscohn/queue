@@ -1,13 +1,7 @@
-import * as constants from '../constants/index';
+import * as constants from '../../constants';
 import thunk from 'redux-thunk';
-import { deleteTodo } from './todos';
-
-export function action(type, payload) {
-  return {
-    type,
-    payload,
-  }
-}
+import { deleteTodo } from '../Todo/todosActions';
+import action from '../../services/action';
 
 export function onCreateList() {
   return (dispatch, getState) => {

@@ -13,27 +13,13 @@ import {
   reorderLists,
   addListToView,
   removeListFromView,
-} from '../actions/index';
-import {
-  onSaveState,
-  onLoadState,
-} from '../actions/state';
+} from './listActions';
 import {
   onCreateTodo,
-} from '../actions/todos';
+} from '../Todo/todosActions';
 import List from './List';
 
 class ListContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.onLoadState = this.onLoadState.bind(this);
-  }
-
-  onLoadState() {
-    const state = JSON.parse(this._state.value);
-    this.props.onLoadState(state);
-  }
-
   render() {
     const hiddenLists = Object.keys(this.props.lists.items).map((id) => {
       id = Number(id);
@@ -70,9 +56,6 @@ class ListContainer extends Component {
           {hiddenLists}
         </div>
         {lists}
-        <button onClick={this.props.onSaveState}>Save</button>
-        <textarea ref={(cmp) => this._state = cmp} />
-        <button onClick={this.onLoadState}>Load</button>
       </div>
     );
   }
@@ -121,12 +104,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     onDropList: (listIndex, hoverIndex) => {
       dispatch(reorderLists(listIndex, hoverIndex));
-    },
-    onSaveState: () => {
-      dispatch(onSaveState());
-    },
-    onLoadState: (json) => {
-      dispatch(onLoadState(json));
     },
   }
 }

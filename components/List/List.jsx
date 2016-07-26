@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as T } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
-import TodosContainer from './TodosContainer';
+import TodosContainer from '../Todo/TodosContainer';
 import flow from 'lodash/flow';
 
 const listType = { LIST: 'LIST' };

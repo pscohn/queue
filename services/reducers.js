@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import lists from './lists';
-import todos from './todos';
-import listTodos from './listTodos';
+import lists from '../components/List/listReducer';
+import todos from '../components/Todo/todosReducer';
+import listTodos from '../reducers/listTodos';
 
 // {
 //   lists: {

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import ListContainer from '../components/ListContainer';
+import ListContainer from '../components/List/ListContainer';
+import State from '../Components/State/State'
 
 export default class App extends Component {
   render() {
     return (
-      <ListContainer />
+      <div>
+        <ListContainer />
+        <State />
+      </div>
     );
   }
 }

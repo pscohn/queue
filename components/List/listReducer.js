@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as constants from '../constants/index';
+import * as constants from '../../constants';
 
 let id;
 

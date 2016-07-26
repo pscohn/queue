@@ -1,7 +1,6 @@
-import * as constants from '../constants/index';
 import thunk from 'redux-thunk';
-import { action } from './index';
-import { HYDRATE_STATE } from '../constants/index';
+import { action } from '../../services/action';
+import { HYDRATE_STATE } from '../../constants';
 
 export function onSaveState() {
   return (dispatch, getState) => {

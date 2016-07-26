@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer, { makeHydratable } from '../reducers/index';
-import { HYDRATE_STATE } from '../constants/index';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
+
+import rootReducer, { makeHydratable } from './reducers';
+import { HYDRATE_STATE } from '../constants';
 
 const logger = createLogger();
 
