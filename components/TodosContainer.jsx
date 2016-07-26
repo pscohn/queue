@@ -1,11 +1,14 @@
 import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
+import { DragDropContext } from 'react-dnd';
 import {
   beginEditTodo,
   saveEditTodo,
   endEditTodo,
   toggleTodo,
   onDeleteTodo,
+  onDropTodo,
+  reorderTodos,
 } from '../actions/todos';
 import Todo from './Todo';
 
@@ -34,6 +37,7 @@ class TodosContainer extends Component {
           onSaveEditTodo={this.props.onSaveEditTodo}
           onToggleTodo={this.props.onToggleTodo}
           onDeleteTodo={this.props.onDeleteTodo}
+          onDropTodo={this.props.onDropTodo}
         />
       )
     });
@@ -71,6 +75,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onDeleteTodo: (listId, todoId) => {
       dispatch(onDeleteTodo(listId, todoId));
+    },
+    onDropTodo: (listId, todoIndex, hoverIndex) => {
+      dispatch(reorderTodos(listId, todoIndex, hoverIndex));
     },
   }
 }

@@ -63,3 +63,11 @@ export function toggleTodo(todoId) {
     todoId,
   });
 }
+
+export function reorderTodos(listId, todoIndex, hoverIndex) {
+  return action(constants.REORDER_TODOS, {
+    listId,
+    todoIndex,
+    hoverIndex,
+  });
+}

@@ -20,6 +20,7 @@ export const END_EDIT_TODO = 'END_EDIT_TODO';
 export const SAVE_EDIT_TODO = 'SAVE_EDIT_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
+export const REORDER_TODOS = 'REORDER_TODOS';
 
 export const SAVE_STATE = 'SAVE_STATE';
 export const LOAD_STATE = 'LOAD_STATE';

@@ -1,6 +1,51 @@
 import React, { Component, PropTypes as T } from 'react';
+import { DragSource, DropTarget } from 'react-dnd';
+import flow from 'lodash/flow';
 
-export default class Todo extends Component {
+const todoType = { TODO: 'TODO' };
+
+const todoSource = {
+  beginDrag(props) {
+    return {
+      id: props.todo.id,
+      index: props.index,
+    };
+  }
+};
+
+const todoTarget = {
+  hover(props, monitor, component) {
+    const dragIndex = monitor.getItem().index;
+    const hoverIndex = props.index;
+
+
+    console.log(props);
+    if (dragIndex === hoverIndex) {
+      return;
+    }
+
+    console.log('poo')
+
+    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+    const clientOffset = monitor.getClientOffset();
+    const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+      return;
+    }
+
+    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+      return;
+    }
+
+    console.log('drop', props.list.id, dragIndex, hoverIndex);
+    props.onDropTodo(props.list.id, dragIndex, hoverIndex);
+    monitor.getItem().index = hoverIndex;
+  }
+};
+
+export class Todo extends Component {
   constructor(props) {
     super(props);
     this.onSaveEditTodo = this.onSaveEditTodo.bind(this);
@@ -16,6 +61,7 @@ export default class Todo extends Component {
     onDoneEditTodo: T.func.isRequired,
     onToggleTodo: T.func.isRequired,
     onDeleteTodo: T.func.isRequired,
+    onDropTodo: T.func.isRequired,
   }
 
   onSaveEditTodo() {
@@ -23,21 +69,34 @@ export default class Todo extends Component {
   }
 
   render() {
+    const { isDragging, connectDragSource, connectDropTarget } = this.props;
+    const opacity = isDragging ? 0 : 1;
+
     if (this.props.todo.isEditing === true) {
-      return (
+      return connectDragSource(connectDropTarget(
         <div className="todo editing">
           <input type="text" ref={(cmp) => this._todoContent = cmp} onChange={this.onSaveEditTodo} value={this.props.todo.content} />
           <button onClick={this.onDoneEditTodo}>Done</button>
         </div>
-      );
+      ));
     }
 
-    return (
-      <div className="todo">
+    return connectDragSource(connectDropTarget(
+      <div className="todo" style={{ opacity }}>
         <span onClick={this.onBeginEditTodo}>{this.props.todo.content}</span>
         <button onClick={this.onToggleTodo}>{this.props.todo.isComplete ? 'Uncomplete' : 'Complete'}</button>
         <button onClick={this.onDeleteTodo}>Delete</button>
       </div>
-    );
+    ));
   }
 }
+
+export default flow(
+  DropTarget(todoType.TODO, todoTarget, connect => ({
+    connectDropTarget: connect.dropTarget()
+  })),
+  DragSource(todoType.TODO, todoSource, (connect, monitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }))
+)(Todo)
