@@ -18,7 +18,7 @@ class State extends Component {
 
   render() {
     return (
-      <div>
+      <div className="state">
         <button onClick={this.props.onSaveState}>Save</button>
         <textarea ref={(cmp) => this._state = cmp} />
         <button onClick={this.onLoadState}>Load</button>

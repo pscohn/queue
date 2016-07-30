@@ -3,6 +3,9 @@ import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import TodosContainer from '../Todo/TodosContainer';
 import flow from 'lodash/flow';
+import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import { Card, CardTitle } from 'material-ui/Card';
 
 const listType = { LIST: 'LIST' };
 
@@ -115,14 +118,18 @@ class List extends Component {
 
     return connectDragSource(connectDropTarget(
       <div className="list" style={{ opacity }}>
-        {this.renderListName()}
-        <button onClick={this.onToggleListView}>Show {this.props.list.isShowingComplete ? 'Active' : 'Complete'}</button>
-        <button onClick={this.onHideList}>Hide</button>
-        <button onClick={this.onDeleteList}>Delete</button>
+        <Card style={{ width: '300px', height: '600px' }}>
+        <CardTitle title={this.renderListName()} style={{ display: 'inline-block' }}/>
+        { this.props.list.isShowingComplete
+          ? <IconButton iconClassName="fa fa-square-o" tooltip="show todo" onClick={this.onToggleListView} />
+          : <IconButton iconClassName="fa fa-check-square" tooltip="show complete" onClick={this.onToggleListView} /> }
+        <IconButton iconClassName="fa fa-minus" tooltip="hide list" onClick={this.onHideList} />
+        <IconButton iconClassName="fa fa-trash" tooltip="delete list" onClick={this.onDeleteList} />
         <TodosContainer
           list={this.props.list}
         />
-        {this.props.list.isShowingComplete ? undefined : <button style={{display: 'block'}} onClick={this.onCreateTodo}>Add Item</button>}
+        {this.props.list.isShowingComplete ? undefined : <FlatButton style={{display: 'block'}} onClick={this.onCreateTodo} label="Add Item" />}
+      </Card>
       </div>
     ));
   }

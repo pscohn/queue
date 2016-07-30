@@ -2,6 +2,7 @@ import React, { Component, PropTypes as T } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
+import IconButton from 'material-ui/IconButton';
 
 const todoType = { TODO: 'TODO' };
 
@@ -36,7 +37,6 @@ const todoTarget = {
       return;
     }
 
-    console.log('drop', props.list.id, dragIndex, hoverIndex);
     props.onDropTodo(props.list.id, dragIndex, hoverIndex);
     monitor.getItem().index = hoverIndex;
   }
@@ -73,7 +73,7 @@ export class Todo extends Component {
       return connectDragSource(connectDropTarget(
         <div className="todo editing">
           <input type="text" ref={(cmp) => this._todoContent = cmp} onChange={this.onSaveEditTodo} value={this.props.todo.content} />
-          <button onClick={this.onDoneEditTodo}>Done</button>
+          <IconButton iconClassName="fa fa-check" onClick={this.onDoneEditTodo} label="Done" />
         </div>
       ));
     }
@@ -81,8 +81,8 @@ export class Todo extends Component {
     return connectDragSource(connectDropTarget(
       <div className="todo" style={{ opacity }}>
         <span onClick={this.onBeginEditTodo}>{this.props.todo.content}</span>
-        <button onClick={this.onToggleTodo}>{this.props.todo.isComplete ? 'Uncomplete' : 'Complete'}</button>
-        <button onClick={this.onDeleteTodo}>Delete</button>
+        <IconButton iconClassName="fa fa-check" onClick={this.onToggleTodo} label={this.props.todo.isComplete ? 'Uncomplete' : 'Complete'} />
+        <IconButton iconClassName="fa fa-trash" onClick={this.onDeleteTodo} label="Delete" />
       </div>
     ));
   }

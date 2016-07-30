@@ -1,4 +1,12 @@
-.list {
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+fa:hover {
+  cursor: pointer;
+}
+
+/*.list {
   width: 300px;
   height: 600px;
   border: 1px solid black;
@@ -6,7 +14,7 @@
   margin-right: 1em;
   margin-top: 1em;
   float: left;
-}
+}*/
 
 a {
   color: blue;
@@ -26,5 +34,9 @@ a:hover {
 }
 
 .create-list-btn {
+  display: block;
+}
+
+.state {
   display: block;
 }

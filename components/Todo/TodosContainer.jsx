@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-dnd';
+import { List as ListUI, ListItem } from 'material-ui/List';
 import {
   beginEditTodo,
   saveEditTodo,
@@ -28,25 +29,27 @@ class TodosContainer extends Component {
       return this.props.list.isShowingComplete ? isComplete === true : isComplete === false;
     }).map((id, index) => {
       return (
-        <Todo
-          key={id}
-          index={index}
-          todo={this.props.todos.items[id]}
-          list={this.props.list}
-          onBeginEditTodo={this.props.onBeginEditTodo}
-          onDoneEditTodo={this.props.onDoneEditTodo}
-          onSaveEditTodo={this.props.onSaveEditTodo}
-          onToggleTodo={this.props.onToggleTodo}
-          onDeleteTodo={this.props.onDeleteTodo}
-          onDropTodo={this.props.onDropTodo}
-        />
+        <ListItem disableTouchRipple={true}>
+          <Todo
+            key={id}
+            index={index}
+            todo={this.props.todos.items[id]}
+            list={this.props.list}
+            onBeginEditTodo={this.props.onBeginEditTodo}
+            onDoneEditTodo={this.props.onDoneEditTodo}
+            onSaveEditTodo={this.props.onSaveEditTodo}
+            onToggleTodo={this.props.onToggleTodo}
+            onDeleteTodo={this.props.onDeleteTodo}
+            onDropTodo={this.props.onDropTodo}
+          />
+      </ListItem>
       )
     });
 
     return (
-      <div>
+      <ListUI>
         {todos}
-      </div>
+      </ListUI>
     );
   }
 }

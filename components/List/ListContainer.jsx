@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import RaisedButton from 'material-ui/RaisedButton';
+import Chip from 'material-ui/Chip';
+import { blue300 } from 'material-ui/styles/colors';
+
+const styles = {
+  chip: {
+    margin: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+};
+
 import {
   onCreateList,
   beginRenameList,
@@ -25,10 +39,14 @@ class ListContainer extends Component {
       id = Number(id);
       if (this.props.lists.listOrder.indexOf(id) === -1) {
         return (
-          <span key={id}>
-            <a onClick={this.props.onShowList.bind(this, id)}>{this.props.lists.items[id].name}</a>
-            {' '}
-          </span>
+          <Chip
+            key={id}
+            style={styles.chip}
+            backgroundColor={blue300}
+            onClick={this.props.onShowList.bind(this, id)}
+          >
+            {this.props.lists.items[id].name}
+          </Chip>
         );
       }
     });
@@ -51,11 +69,13 @@ class ListContainer extends Component {
     });
     return (
       <div>
-        <button onClick={this.props.onCreateList} className="create-list-btn">Create list</button>
-        <div>
+        <RaisedButton onClick={this.props.onCreateList} className="create-list-btn" label="Create list" />
+        <div style={styles.wrapper}>
           {hiddenLists}
         </div>
-        {lists}
+        <div style={{ display: 'block' }}>
+          {lists}
+        </div>
       </div>
     );
   }
