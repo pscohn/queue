@@ -26,10 +26,11 @@ class TodosContainer extends Component {
     const todos = this.props.listTodos.lists[this.props.list.id].filter((id) => {
       const { isComplete } = this.props.todos.items[id];
       return this.props.list.isShowingComplete ? isComplete === true : isComplete === false;
-    }).map((id) => {
+    }).map((id, index) => {
       return (
         <Todo
           key={id}
+          index={index}
           todo={this.props.todos.items[id]}
           list={this.props.list}
           onBeginEditTodo={this.props.onBeginEditTodo}

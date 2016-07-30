@@ -1,4 +1,5 @@
 import React, { Component, PropTypes as T } from 'react';
+import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 
@@ -18,13 +19,9 @@ const todoTarget = {
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
 
-
-    console.log(props);
     if (dragIndex === hoverIndex) {
       return;
     }
-
-    console.log('poo')
 
     const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
     const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;

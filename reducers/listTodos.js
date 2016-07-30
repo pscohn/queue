@@ -14,6 +14,18 @@ function lists(state = {}, action) {
       const { [String(action.payload.id)]: deletedList, ...rest } = state;
       console.log('list todos', rest)
       return rest;
+    case constants.REORDER_TODOS:
+      const newOrder = state[action.payload.listId].slice();
+      const spliceList = newOrder.splice(action.payload.todoIndex, 1);
+      newOrder.splice(
+        action.payload.hoverIndex,
+        0,
+        spliceList[0]
+      );
+      return {
+        ...state,
+        [action.payload.listId]: newOrder,
+      };
     case constants.MOVE_TODO_TO_LIST:
       listId = action.payload.listId;
       todoId = action.payload.todoId;
