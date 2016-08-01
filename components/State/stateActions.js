@@ -1,5 +1,5 @@
 import thunk from 'redux-thunk';
-import { action } from '../../services/action';
+import action from '../../services/action';
 import { HYDRATE_STATE } from '../../constants';
 
 export function onSaveState() {

@@ -117,8 +117,8 @@ class List extends Component {
     const opacity = isDragging ? 0 : 1;
 
     return connectDragSource(connectDropTarget(
-      <div className="list" style={{ opacity }}>
-        <Card style={{ width: '300px', height: '600px' }}>
+      <div style={{ opacity }}>
+        <Card className="list">
         <CardTitle title={this.renderListName()} style={{ display: 'inline-block' }}/>
         { this.props.list.isShowingComplete
           ? <IconButton iconClassName="fa fa-square-o" tooltip="show todo" onClick={this.onToggleListView} />

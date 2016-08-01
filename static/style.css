@@ -6,15 +6,14 @@ fa:hover {
   cursor: pointer;
 }
 
-/*.list {
-  width: 300px;
+.list {
+  width: 320px;
   height: 600px;
-  border: 1px solid black;
   display: block;
   margin-right: 1em;
   margin-top: 1em;
   float: left;
-}*/
+}
 
 a {
   color: blue;
