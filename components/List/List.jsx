@@ -119,17 +119,17 @@ class List extends Component {
     return connectDragSource(connectDropTarget(
       <div style={{ opacity }}>
         <Card className="list">
-        <CardTitle title={this.renderListName()} style={{ display: 'inline-block' }}/>
-        { this.props.list.isShowingComplete
-          ? <IconButton iconClassName="fa fa-square-o" tooltip="show todo" onClick={this.onToggleListView} />
-          : <IconButton iconClassName="fa fa-check-square" tooltip="show complete" onClick={this.onToggleListView} /> }
-        <IconButton iconClassName="fa fa-minus" tooltip="hide list" onClick={this.onHideList} />
-        <IconButton iconClassName="fa fa-trash" tooltip="delete list" onClick={this.onDeleteList} />
-        <TodosContainer
-          list={this.props.list}
-        />
-        {this.props.list.isShowingComplete ? undefined : <FlatButton style={{display: 'block'}} onClick={this.onCreateTodo} label="Add Item" />}
-      </Card>
+          <CardTitle title={this.renderListName()} style={{ display: 'inline-block' }}/>
+          { this.props.list.isShowingComplete
+            ? <IconButton iconClassName="fa fa-square-o" tooltip="show todo" onClick={this.onToggleListView} />
+            : <IconButton iconClassName="fa fa-check-square" tooltip="show complete" onClick={this.onToggleListView} /> }
+          <IconButton iconClassName="fa fa-minus" tooltip="hide list" onClick={this.onHideList} />
+          <IconButton iconClassName="fa fa-trash" tooltip="delete list" onClick={this.onDeleteList} />
+          <TodosContainer
+            list={this.props.list}
+          />
+          {this.props.list.isShowingComplete ? undefined : <FlatButton style={{display: 'block'}} onClick={this.onCreateTodo} label="Add Item" />}
+        </Card>
       </div>
     ));
   }
