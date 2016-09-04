@@ -1,3 +1,13 @@
+## Installation
+
+`npm install`
+
+`npm install -g webpack-dev-server`
+
+`webpack-dev-server`
+
+go to `localhost:8080/webpack-dev-server/static`
+
 TODO
 
 - fix long list style
